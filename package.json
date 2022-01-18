@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/adamkdean/zerossl-verify"
   },
-  "main": "dist/lib/index.js",
+  "main": "out/src/index.js",
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/main.ts",

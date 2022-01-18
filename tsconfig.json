@@ -7,7 +7,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "dist",
+    "outDir": "out",
     "preserveConstEnums": true,
     "removeComments": true,
     "resolveJsonModule": true,
