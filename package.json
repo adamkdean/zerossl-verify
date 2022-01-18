@@ -1,7 +1,7 @@
 {
   "name": "zerossl-verify",
   "version": "0.0.1",
-  "description": "",
+  "description": "ZeroSSL domain verification utility (for testing purposes only)",
   "private": true,
   "author": "Adam K Dean <adamkdean@googlemail.com>",
   "license": "MIT",

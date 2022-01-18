@@ -1,5 +1,7 @@
 # zerossl-verify
 
+ZeroSSL domain verification utility (for testing purposes only).
+
 - [zerossl-verify](#zerossl-verify)
   - [Disclaimer](#disclaimer)
   - [License](#license)
