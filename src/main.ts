@@ -41,12 +41,15 @@ app.get('/.well-known/pki-validation/:value', async (req, res, next) => {
   // Find the correct certificate record
   let cert = null
   for (const result of certs.results) {
+    console.log(`checking ${result.id} ${result.common_name}...`)
     const validation = result.validation.other_methods[host]
     const requiredPath = validation.file_validation_url_http.replace(`http://${host}`, '')
     if (req.path === requiredPath) {
       cert = result
       break
     }
+
+    console.log(`${req.path} !== ${requiredPath}`)
   }
   if (cert === null) return next()
 
