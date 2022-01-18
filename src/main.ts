@@ -49,6 +49,12 @@ app.get('/.well-known/pki-validation/:value', async (req, res, next) => {
   let cert = null
   for (const result of certs.results) {
     console.log(`checking ${result.id} ${result.common_name}...`)
+
+    if (result.status === 'cancelled') {
+      console.log(`certificate ${result.id} ${result.common_name} has been cancelled`)
+      continue
+    }
+
     const validation = result.validation.other_methods[host]
     const requiredPath = validation.file_validation_url_http.replace(`http://${host}`, '')
     if (req.path === requiredPath) {
