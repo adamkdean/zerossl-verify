@@ -3,9 +3,10 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import { ZeroSSL } from 'zerossl'
 import dotenv from 'dotenv'
 import express from 'express'
+import { ZeroSSL } from 'zerossl'
+import { CertificateRecord } from 'zerossl/lib/types'
 
 dotenv.config()
 
@@ -24,25 +25,28 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/.well-known/pki-validation/:value', async (req, res, next) => {
-  // 1. Find a certificate for the current hostname
+  // Find a certificate for the current hostname
   const host = req.headers['x-forwarded-host'] as string || req.headers.host
   if (!host) return next()
 
-  // 2. Get the certificate record
-  const certs = await zerossl.listCertificates({ search: host, certificate_status: 'pending_validation', limit: 1 })
+  // Search certificate records for hostname
+  const certs = await zerossl.listCertificates({ search: host })
   if (certs.result_count === 0) return next()
 
-  // 3. Make sure we can get the validation data
-  const cert = certs.results[0]
-  const validation = cert.validation.other_methods[host]
-  if (!validation) return next()
+  // Find the correct certificate record
+  let cert = null
+  for (const result of certs.results) {
+    const validation = result.validation.other_methods[host]
+    const requiredPath = validation.file_validation_url_http.replace(`http://${host}`, '')
+    if (req.path === requiredPath) {
+      cert = result
+      break
+    }
+  }
+  if (cert === null) return next()
 
-  // 4. Ensure the path is correct
-  const requiredPath = validation.file_validation_url_http.replace(`http://${host}`, '')
-  if (req.path !== requiredPath) return next()
-
-  // 5. Return the validation data
-  const content = validation.file_validation_content.join('\n')
+  // Return the validation data
+  const content = cert.validation.other_methods[host].file_validation_content.join('\n')
   return res.contentType('text/plain').send(content)
 })
 
