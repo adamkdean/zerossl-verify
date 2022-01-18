@@ -1,0 +1,27 @@
+{
+  "name": "zerossl-verify",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "author": "Adam K Dean <adamkdean@googlemail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adamkdean/zerossl-verify"
+  },
+  "main": "dist/lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/main.ts",
+    "start": "node out/src/main.js"
+  },
+  "devDependencies": {
+    "@edge/eslint-config-typescript": "^0.1.1",
+    "@types/node": "^16.11.10",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "dotenv": "^14.1.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.3"
+  }
+}
