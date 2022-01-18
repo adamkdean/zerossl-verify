@@ -29,7 +29,7 @@ app.get('/.well-known/pki-validation/:value', async (req, res, next) => {
   if (!host) return next()
 
   // 2. Get the certificate record
-  const certs = await zerossl.listCertificates({ search: host, certificate_status: 'draft', limit: 1 })
+  const certs = await zerossl.listCertificates({ search: host, certificate_status: 'pending_validation', limit: 1 })
   if (certs.result_count === 0) return next()
 
   // 3. Make sure we can get the validation data
