@@ -30,7 +30,7 @@ app.get('/.well-known/pki-validation/:value', async (req, res, next) => {
   if (!host) return next()
 
   // Search certificate records for hostname
-  const certs = await zerossl.listCertificates({ search: host })
+  const certs = await zerossl.listCertificates({ search: host, limit: 100 })
   if (certs.result_count === 0) return next()
 
   // Find the correct certificate record
