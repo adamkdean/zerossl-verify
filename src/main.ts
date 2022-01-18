@@ -3,4 +3,9 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-console.log('test')
+import express from 'express'
+
+const app = express()
+const port = process.env.HTTP_PORT || 8000
+
+app.listen(port, () => console.log(`Listening on port ${port}`))
