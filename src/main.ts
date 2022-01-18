@@ -18,7 +18,7 @@ const app = express()
 app.use('*', (req, res, next) => {
   const datetime = new Date().toISOString()
   const host = req.headers['x-forwarded-host'] as string || req.headers.host
-  console.log(`[${host}] ${datetime} ${req.method} ${req.path}`)
+  console.log(`[${host}] ${datetime} ${req.method} ${req.url}`)
   next()
 })
 
