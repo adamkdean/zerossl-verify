@@ -3,10 +3,9 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import { ZeroSSL } from 'zerossl'
 import dotenv from 'dotenv'
 import express from 'express'
-import { ZeroSSL } from 'zerossl'
-import { CertificateRecord } from 'zerossl/lib/types'
 
 dotenv.config()
 
@@ -15,6 +14,12 @@ const accessKey = process.env.ZEROSSL_API_KEY || ''
 
 const zerossl = new ZeroSSL({ accessKey })
 const app = express()
+
+app.use('*', (req, res, next) => {
+  const datetime = new Date().toISOString()
+  console.log(`(${datetime}) ${req.method} ${req.path}`)
+  next()
+})
 
 app.get('/', async (req, res) => {
   const host = req.headers['x-forwarded-host'] as string || req.headers.host
