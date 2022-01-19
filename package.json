@@ -29,6 +29,6 @@
   },
   "dependencies": {
     "express": "^4.17.2",
-    "zerossl": "^0.2.1"
+    "zerossl": "^1.1.0"
   }
 }
