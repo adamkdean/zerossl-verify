@@ -10,7 +10,7 @@ import express from 'express'
 dotenv.config()
 
 const port = process.env.HTTP_PORT || 8000
-const accessKey = process.env.ZEROSSL_API_KEY || ''
+const accessKey = process.env.ZEROSSL_ACCESS_KEY || ''
 
 const zerossl = new ZeroSSL({ accessKey })
 const app = express()
